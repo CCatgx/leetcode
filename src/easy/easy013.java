@@ -1,5 +1,8 @@
 package easy;
 
+import java.util.HashMap;
+import java.util.Stack;
+
 /**
  * @ClassName easy013
  * @Description TODO
@@ -33,16 +36,16 @@ public class easy013 {
 
      输入: "III"
      输出: 3
-     示例 2:
 
+     示例 2:
      输入: "IV"
      输出: 4
-     示例 3:
 
+     示例 3:
      输入: "IX"
      输出: 9
-     示例 4:
 
+     示例 4:
      输入: "LVIII"
      输出: 58
      解释: L = 50, V= 5, III = 3.
@@ -52,13 +55,35 @@ public class easy013 {
      输出: 1994
      解释: M = 1000, CM = 900, XC = 90, IV = 4.
     **/
-
     public int romanToInt(String s) {
-        return 0;
+        int result = 0;
+        HashMap<String,Integer> roman = new HashMap<>();
+        roman.put("I",1);
+        roman.put("V",5);
+        roman.put("X",10);
+        roman.put("L",50);
+        roman.put("C",100);
+        roman.put("D",500);
+        roman.put("M",1000);
+
+        char[] resultChar = s.toCharArray();
+        for(int i=resultChar.length-1;i>=0;i--){
+            if(result==0){
+                result += roman.get(resultChar[i]+"");
+            }else{
+                if(roman.get(resultChar[i]+"") >= roman.get(resultChar[i+1]+"")){
+                    result += roman.get(resultChar[i]+"");
+                }else if(roman.get(resultChar[i]+"") < roman.get(resultChar[i+1]+"")){
+                    result -= roman.get(resultChar[i]+"");
+                }
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args){
-
+        easy013 easy013 = new easy013();
+        System.out.println(easy013.romanToInt("MCMXCIV"));
     }
 
 

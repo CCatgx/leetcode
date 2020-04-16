@@ -16,7 +16,28 @@ public class easy021 {
      *  输出：1->1->2->3->4->4
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        return null;
+        ListNode temp = null;
+        if(l1!=null&&l2!=null){
+            //如果l1，比l2小，则l1节点在前面
+            if(l1.val <= l2.val){
+                temp = mergeTwoLists(l1.next,l2);
+                System.out.println("此时的l1为"+l1);
+                System.out.println("返回的temp为1"+temp);
+            } else {
+                temp = mergeTwoLists(l1,l2.next);
+                System.out.println("此时的l2为"+l2);
+                System.out.println("返回的temp为2"+temp);
+            }
+        }
+        if(l1 == null ){
+            temp = new ListNode(l2.val);
+            System.out.println("到尾部了");
+        }
+        if(l2 == null){
+            temp = new ListNode(l1.val);
+        }
+        System.out.println("temp="+temp);
+        return temp;
     }
 
     static class ListNode {
@@ -45,10 +66,9 @@ public class easy021 {
         l11.next = l13;
         l13.next = l14;
 
-        System.out.println(l1.toString());
-        System.out.println(l11.toString());
+
 
         easy021 e021 = new easy021();
-        e021.mergeTwoLists(l1,l11);
+        System.out.println("mergeTwoLists result: "+e021.mergeTwoLists(l1,l11));
     }
 }
